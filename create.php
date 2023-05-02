@@ -1,96 +1,54 @@
-<?php 
+<?php
 
-include "config.php";
+include 'user.php';
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
-  if (isset($_POST['submit'])) {
+if(isset($_POST['submit'])){
+    $id=$_POST['id'];
+    $name=$_POST['name'];
+    $email=$_POST['email'];
+    $mobile=$_POST['mobile'];
+    $password=$_POST['password'];
+}
 
-    $slno=$_POST['slno'];
+$sql= "INSERT INTO 'crud' VALUES ('$id', '$name','$email','$mobile','$password')";
 
-    $first_name = $_POST['firstname'];
 
-    $last_name = $_POST['lastname'];
+$result=mysqli_query($conn,$sql);
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+if ($result==True){
+echo ' created succesfully';
+}
 
-    $email = $_POST['email'];
+else{
+    'couldnt create';
 
-    $password = $_POST['password'];
+}
 
-    $gender = $_POST['gender'];
-
-    $sql = "INSERT INTO `users`(`firstname`, `lastname`, `email`, `password`, `gender`) VALUES ('$first_name','$last_name','$email','$password','$gender')";
-
-    $result = $conn->query($sql);
-
-    if ($result == TRUE) {
-
-      echo "New record created successfully.";
-
-    }else{
-
-      echo "Error:". $sql . "<br>". $conn->error;
-
-    } 
-
-    $conn->close(); 
-
-  }
-
+mysqli_close($conn);
 ?>
 
-<!DOCTYPE html>
-
+<!DOCTYPE html >
 <html>
 
-<body>
-
-<h2>Signup Form</h2>
-
+<h2>form</h2>
 <form action="" method="POST">
 
-  
+Id:<br>
+<input type="text" name="id"/><br>
 
-    <h1><b>Personal information: </b></h1><br><br>
+Name:<br>
+<input type="text" name="Name"/><br>
 
-    <label>slno:</label><br>
-    <input type="text" name="slno"><br><br>
+Email:<br>
+<input type="text" name ="Email"/><br>
 
-    <label>First name:</label><br>
+Mobile:<br>
+<input type="text" name="Mobile"/><br>
+Password:<br>
+<input type="text" name="Password"/><br>
 
-    <input type="text" name="firstname"><br><br>
-
-    <br>
-
-    <label>Last name:</label><br>
-
-    <input type="text" name="lastname"><br><br>
-
-    <br>
-
-    <label>Email:</label><br>
-
-    <input type="text" name="email"><br><br>
-
-    <br>
-
-    <label>Password:</label><br>
-
-    <input type="password" name="password"><br><br>
-
-    <br>
-
-    <label>Gender:</label><br>
-
-    <input type="radio" name="gender" value="Male">Male
-
-    <input type="radio" name="gender" value="Female">Female
-
-    <br><br>
-    <label>submit</submit>
-    <input type="submit" name="submit" value="submit">
-
- 
+<input type="submit" name="Submit" value="submit">
 
 </form>
-
-</body>
-
 </html>
